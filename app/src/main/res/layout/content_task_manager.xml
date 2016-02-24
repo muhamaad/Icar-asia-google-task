@@ -43,7 +43,7 @@
             android:id="@+id/notes_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Note" />
+            android:hint="Description" />
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +37,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
     private Context context;
     private GoogleTaskApplication globalVariable;
 
+
+
     public TaskListAdapter(Context context, ArrayList<ItemsDb> itemArrayList) {
         this.context = context;
         this.itemArrayList = itemArrayList;
+
     }
 
     @Override
@@ -124,4 +131,5 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
         }
 
     }
+
 }

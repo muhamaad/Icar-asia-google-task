@@ -1,6 +1,7 @@
 package test.com.zarea.googletask.view;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.tasks.model.Task;
 
@@ -19,10 +23,11 @@ import test.com.zarea.googletask.googleTaskApis.OnFinishAction;
 import test.com.zarea.googletask.googleTaskApis.TaskController;
 import test.com.zarea.googletask.util.Misc;
 
-public class TaskManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class TaskManagerActivity extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    GoogleApiClient mGoogleApiClient;
     private GoogleTaskApplication globalVariable;
-
     private Toolbar toolbar;
     private EditText titleEditText;
     private EditText noteEditText;
@@ -30,14 +35,16 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
     private String actionType;
     private int position = 0;
     private String itemId;
+    private double lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_manager);
         initViews();
-        getIntents();
         init();
+        getIntents();
+
     }
 
     private void initViews() {
@@ -58,6 +65,12 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         actionType = intent.getStringExtra("actionType");
         if (actionType.equals("insert")) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
 
         } else if (actionType.equals("update")) {
             itemId = intent.getStringExtra("itemId");
@@ -153,5 +166,25 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
         } else {
             Toast.makeText(TaskManagerActivity.this, "Please fill all failed", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        String location = "Current location:\n" + "Latitude: " + mLastLocation.getLatitude() + "\n" + "Longitude: " + mLastLocation.getLongitude();
+        noteEditText.setText(location);
+        mGoogleApiClient.disconnect();
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }
