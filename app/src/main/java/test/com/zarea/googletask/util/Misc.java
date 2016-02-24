@@ -8,9 +8,9 @@ import android.net.NetworkInfo;
  * Created by zarea on 2/24/16.
  */
 public class Misc {
-    public static enum actionType {delete,insert,update}
     /**
      * Checks whether the device currently has a network connection.
+     *
      * @return true if the device has a network connection, false otherwise.
      */
     public static boolean isDeviceOnline(Context context) {
@@ -19,4 +19,7 @@ public class Misc {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
     }
+
+    public static enum actionType {delete, insert, update}
+
 }

@@ -43,7 +43,7 @@ public class PendingDB extends Model {
         return new PendingDB(null, title, notes, actionType).save();
     }
 
-    public static Long insertUpdate(String id,String title, String notes, String actionType) {
+    public static Long insertUpdate(String id, String title, String notes, String actionType) {
         return new PendingDB(id, title, notes, actionType).save();
     }
 

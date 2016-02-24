@@ -10,9 +10,10 @@ import com.google.api.services.tasks.TasksScopes;
  * Created by zarea on 2/22/16.
  */
 public class GoogleTaskApplication extends Application {
-    public GoogleAccountCredential mCredential;
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { TasksScopes.TASKS_READONLY };
+    private static final String[] SCOPES = {TasksScopes.TASKS_READONLY};
+    public GoogleAccountCredential mCredential;
+
     @Override
     public void onCreate() {
         super.onCreate();

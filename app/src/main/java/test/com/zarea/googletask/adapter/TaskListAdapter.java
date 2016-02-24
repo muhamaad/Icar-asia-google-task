@@ -47,8 +47,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
     @Override
     public void onBindViewHolder(final TaskListHolder holder, final int position) {
         holder.titleTextView.setText(itemArrayList.get(position).getTitle());
-        if(itemArrayList.get(position).getState().equals("updated")){
-            holder.itemLinearLayout.setBackgroundColor(Color.);
+        if (itemArrayList.get(position).getState().equals("updated") || itemArrayList.get(position).getState().equals("offline")) {
+            holder.itemLinearLayout.setBackgroundColor(Color.rgb(250, 96, 0));
+        } else if (itemArrayList.get(position).getState().equals("failed")) {
+            holder.itemLinearLayout.setBackgroundColor(Color.rgb(249, 15, 0));
+        } else {
+            holder.itemLinearLayout.setBackgroundColor(Color.rgb(73, 255, 0));
         }
         holder.itemLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +93,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
         task.setTitle(itemArrayList.get(position).getTitle());
         task.setNotes(itemArrayList.get(position).getNotes());
         TaskController taskController = new TaskController(globalVariable.mCredential, Misc.actionType.delete.toString());
-        taskController.onfinish = new OnFinishAction() {
+        taskController.delegate = new OnFinishAction() {
             @Override
             public void onSuccess(Task task) {
                 ItemsDb.deleteItemById(task.getId());
@@ -101,7 +105,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
     }
 
     private void deleteOffline(int position) {
-        PendingDB.insert(itemArrayList.get(position).getItemId(),itemArrayList.get(position).getTitle(),itemArrayList.get(position).getNotes(), Misc.actionType.delete.toString());
+        PendingDB.insert(itemArrayList.get(position).getItemId(), itemArrayList.get(position).getTitle(), itemArrayList.get(position).getNotes(), Misc.actionType.delete.toString());
         ItemsDb.deleteItemById(itemArrayList.get(position).getItemId());
         itemArrayList.remove(position);
         notifyDataSetChanged();

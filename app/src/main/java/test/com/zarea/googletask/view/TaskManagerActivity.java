@@ -53,6 +53,7 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
         doneButton.setOnClickListener(this);
     }
 
+
     private void getIntents() {
         Intent intent = getIntent();
         actionType = intent.getStringExtra("actionType");
@@ -79,6 +80,7 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
     private void addNewTask() {
         if (!titleEditText.getText().toString().equals("") && !noteEditText.getText().toString().equals("")) {
             if (Misc.isDeviceOnline(TaskManagerActivity.this)) {
@@ -87,7 +89,7 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
                 task.setNotes(noteEditText.getText().toString());
                 task.setDue(new DateTime(System.currentTimeMillis() + 3600000));
                 TaskController taskController = new TaskController(globalVariable.mCredential, Misc.actionType.insert.toString());
-                taskController.onfinish = new OnFinishAction() {
+                taskController.delegate = new OnFinishAction() {
                     @Override
                     public void onSuccess(Task task) {
                         Intent intent = new Intent();
@@ -125,7 +127,7 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
                 task.setNotes(noteEditText.getText().toString());
                 task.setDue(new DateTime(System.currentTimeMillis() + 3600000));
                 TaskController taskController = new TaskController(globalVariable.mCredential, Misc.actionType.update.toString());
-                taskController.onfinish = new OnFinishAction() {
+                taskController.delegate = new OnFinishAction() {
                     @Override
                     public void onSuccess(Task task) {
                         Intent intent = new Intent();
@@ -138,8 +140,8 @@ public class TaskManagerActivity extends AppCompatActivity implements View.OnCli
                     }
                 };
                 taskController.execute(task);
-            }else {
-                Long aLong = PendingDB.insertUpdate(itemId,titleEditText.getText().toString(), noteEditText.getText().toString(), Misc.actionType.update.toString());
+            } else {
+                Long aLong = PendingDB.insertUpdate(itemId, titleEditText.getText().toString(), noteEditText.getText().toString(), Misc.actionType.update.toString());
                 Intent intent = new Intent();
                 intent.putExtra("id", itemId);
                 intent.putExtra("title", titleEditText.getText().toString());

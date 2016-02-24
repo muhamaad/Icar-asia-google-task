@@ -14,11 +14,11 @@ import java.io.IOException;
 /**
  * Created by zarea on 2/23/16.
  */
-public class GetTasksWebService  extends AsyncTask<String, Void, Tasks> {
+public class GetTasksWebService extends AsyncTask<String, Void, Tasks> {
+    public OnFinishGetTasks delegate;
+    GoogleAccountCredential googleAccountCredential;
     private com.google.api.services.tasks.Tasks mService = null;
     private Exception mLastError = null;
-    GoogleAccountCredential googleAccountCredential;
-    public OnFinishGetTasks delegate;
 
     public GetTasksWebService(GoogleAccountCredential credential) {
         googleAccountCredential = credential;
@@ -32,6 +32,7 @@ public class GetTasksWebService  extends AsyncTask<String, Void, Tasks> {
 
     /**
      * Background task to call Google Tasks API.
+     *
      * @param params no parameters needed for this task.
      */
     @Override

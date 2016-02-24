@@ -23,7 +23,7 @@
             android:value="11" />
 
         <activity
-            android:name=".view.TestTask"
+            android:name=".view.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
