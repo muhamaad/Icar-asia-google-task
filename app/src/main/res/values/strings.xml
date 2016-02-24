@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Google Task</string>
+    <string name="action_settings">Log out</string>
+    <string name="server_clint_id">1046510944642-6r1pnoquj8altf8vsncm7b4bgffsarvp.apps.googleusercontent.com</string>
+    <string name="title_activity_task_list">TaskList</string>
+    <string name="Delete">delete</string>
+    <string name="key">AIzaSyDbilEzCoJMIPsDq_RNNL4yZySppGHcHhY</string>
+    <string name="task_list_activity_name">Task List</string>
+    <string name="title_activity_task_manager">TaskManagerActivity</string>
+</resources>

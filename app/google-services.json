@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "data-axiom-122904",
+    "project_number": "1046510944642",
+    "name": "Google Task"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046510944642:android:b1aed5acb89c48e8",
+        "client_id": "android:test.com.zarea.googletask",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "test.com.zarea.googletask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046510944642-g7dh1gl78thth38qr4nt9l0uvk5curls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "test.com.zarea.googletask",
+            "certificate_hash": "9F21B29A25C2C73F554B13946948BBBED7261951"
+          }
+        },
+        {
+          "client_id": "1046510944642-6r1pnoquj8altf8vsncm7b4bgffsarvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
